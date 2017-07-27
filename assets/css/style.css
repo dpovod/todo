@@ -1,0 +1,14 @@
+.wrapper {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.auth-form {
+    width: 60%;
+    margin: 0 auto;
+}
