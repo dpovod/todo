@@ -14,7 +14,7 @@ class Request {
         if ($this->method == 'GET') {
             $this->requestData = $_GET;
         } elseif ($this->method == 'POST') {
-            $this->requestData = $_POST;
+            $this->requestData = array_merge($_POST, $_GET);
         }
     }
 
@@ -30,11 +30,19 @@ class Request {
         return $this->requestData;
     }
 
-    public function get($parameter) {
+    public function get($parameter, $defaultValue = null) {
         if (!empty($this->requestData[$parameter])) {
             return $this->requestData[$parameter];
         } else {
-            return null;
+            return $defaultValue;
+        }
+    }
+
+    public function has($parameter) {
+        if (!empty($this->requestData[$parameter])) {
+            return true;
+        } else {
+            return false;
         }
     }
 

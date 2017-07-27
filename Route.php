@@ -10,6 +10,10 @@ class Route {
 
     public $request;
 
+    private $url = '';
+
+    private $fullUrl = '';
+
     public function __construct() {
         $routeParts = explode('/', $_SERVER['REQUEST_URI']);
         $controllerName = null;
@@ -20,12 +24,19 @@ class Route {
         }
 
         if (!empty($routeParts[2])) {
+            $routeParts[2] = preg_replace('/\?.+/', '', $routeParts[2]);
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $this->action = 'get'. ucfirst($routeParts[2]) . 'Action';
             } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->action = 'post'. ucfirst($routeParts[2]) . 'Action';
             }
         }
+
+        if (!empty($routeParts[1]) && !empty($routeParts[2])) {
+            $this->url = $routeParts[1] . '/' . $routeParts[2];
+        }
+
+        $this->fullUrl = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $this->request = new Request();
     }
@@ -63,5 +74,32 @@ class Route {
         }
         header('Location: http://' . $_SERVER['SERVER_NAME'] . '/' . $link);
         exit;
+    }
+
+    public function getCurrentBaseUrl() {
+        return $this->url;
+    }
+
+    public function getFullUrl() {
+        return $this->fullUrl;
+    }
+
+    public function getFullUrlWithNewParameter($paramName = '', $paramValue = '') {
+        $request = $this->request;
+
+        $url = $this->fullUrl;
+
+        if ($request->has($paramName)) {
+            $value = $request->get($paramName);
+            $url = str_replace($paramName . '=' . $value, $paramName . '=' . $paramValue, $url);
+        } else {
+            if (strpos($url, '?') !== false) {
+                $url = $url . '&' . $paramName . '=' . $paramValue;
+            } else {
+                $url = $url . '?' . $paramName . '=' . $paramValue;
+            }
+        }
+
+        return $url;
     }
 }

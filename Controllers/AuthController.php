@@ -1,13 +1,12 @@
 <?php
 
 namespace Controllers;
-//@todo: добавить в autoload
 require_once __DIR__ . '/../Models/User.php';
-use Illuminate\Support\Facades\Validator;
 use Models\User;
 use \View;
+use \Controller;
 
-class AuthController extends \Controller {
+class AuthController extends Controller {
 
     public function getLoginAction() {
         View::render('auth/login');

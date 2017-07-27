@@ -3,10 +3,12 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Главная</title>
+    <title>TODO List</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-    <script type="text/javascript" href="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="row">
@@ -41,21 +43,27 @@
 
         <div class="content">
             <div class="row">
-                <?php if (!empty($errors)) { ?>
-                    <?php foreach ($errors as $error) { ?>
+                <?php if (!empty($errors)) : ?>
+                    <?php foreach ($errors as $error) : ?>
                         <div class="alert alert-danger" role="alert"><?php echo $error ?></div>
-                    <?php } ?>
-                <?php } ?>
-                <?php if (!empty($success)) { ?>
-                    <div class="alert alert-success" role="alert"><?php echo $success ?></div>
-                <?php } ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
+                <?php if (!empty($success)) : ?>
+                    <div class="alert alert-success" role="alert"><?php echo $success ?></div>
+                <?php endif; ?>
             </div>
             <?php include 'Views/' . $contentView . '.php'; ?>
         </div>
 
     </div>
 </div>
-
+<script>
+    setTimeout(function () {
+        $(".alert-success").fadeTo(1000, 500).slideUp(500, function(){
+            $(".alert-success").alert('close');
+        });
+    }, 2000);
+</script>
 </body>
 </html>

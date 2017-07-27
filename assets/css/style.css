@@ -1,3 +1,16 @@
+.mar-t-10 {
+    margin-top: 10px !important;
+}
+.mar-b-10 {
+    margin-bottom: 10px !important;
+}
+.visible {
+    visibility: visible !important;
+}
+.container,
+.row {
+    max-width: 100% !important;
+}
 .wrapper {
     width: 80%;
     max-width: 1200px;
