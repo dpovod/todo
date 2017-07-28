@@ -17,7 +17,7 @@ class User extends Model {
         }
 
         if (empty($errors)) {
-            $email = preg_replace('.+?<script(.*?)>(.*?)<\/script>', '', $data['email']);
+            $email = preg_replace('/.*<script(.*?)>(.*?)<\/script>/', '', $data['email']);
 
             if (empty($email)) {
                 $errors[] = 'Пустой email';

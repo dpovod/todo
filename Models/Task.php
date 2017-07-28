@@ -22,13 +22,13 @@ class Task extends Model {
         }
 
         if (empty($errors)) {
-            $title = preg_replace('.+?<script(.*?)>(.*?)<\/script>', '', $data['title']);
+            $title = preg_replace('/.*<script(.*?)>(.*?)<\/script>/', '', $data['title']);
 
             if (empty($title)) {
                 $errors[] = 'Пустой заголовок задачи';
             }
 
-            $content = preg_replace('.+?<script(.*?)>(.*?)<\/script>', '', $data['content']);
+            $content = preg_replace('/.*<script(.*?)>(.*?)<\/script>/', '', $data['content']);
 
             if (empty($content)) {
                 $errors[] = 'Пустое тело задачи';

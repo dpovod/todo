@@ -12,3 +12,15 @@ composer update
 ```
 php migration.php
 ```
+## How to run UNIT tests
+
+**Linux**
+
+```
+vendor/bin/phpunit
+```
+
+**Windows**
+```
+vendor\bin\phpunit
+```
