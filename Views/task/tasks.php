@@ -1,22 +1,30 @@
 <div class="container">
     <div style="overflow: hidden">
-        <div class="col-md-6">
+        <div class="col-md-6 pad-l-0">
             <h3 class="mar-t-10">Все задачи</h3>
         </div>
-        <div class="col-md-6 text-right clearfix">
+        <div class="col-md-6 text-right pad-r-0 clearfix">
             <a class="btn btn-success" href="/task/create">Добавить</a>
         </div>
     </div>
 
+    <?php if (!empty($tasks) && count($tasks) > 0) : ?>
     <div class="container" style="max-width: 100%;">
-        <div class="dropdown pull-right">
-            <button class="btn btn-xs dropdown-toggle mar-b-10" type="button" data-toggle="dropdown">
-                <?php echo ($sort == 'asc') ? 'срочные в начале' : 'срочные в конце' ?>
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="/<?php echo $url ?>?sort=desc">срочные в конце</a></li>
-                <li><a href="/<?php echo $url ?>?sort=asc">срочные в начале</a></li>
-            </ul>
+        <div class="col-md-6 mass-actions pad-l-0" style="visibility: hidden;">
+            <a class="btn btn-success complete">Выполнено</a>
+            <a class="btn btn-warning uncomplete">Не выполнено</a>
+            <a class="btn btn-danger delete">Удалить</a>
+        </div>
+        <div class="col-md-6 pad-r-0">
+            <div class="dropdown pull-right">
+                <button class="btn btn-xs dropdown-toggle mar-t-10" type="button" data-toggle="dropdown">
+                    <?php echo ($sort == 'asc') ? 'срочные в начале' : 'срочные в конце' ?>
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="/<?php echo $url ?>?sort=desc">срочные в конце</a></li>
+                    <li><a href="/<?php echo $url ?>?sort=asc">срочные в начале</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <table class="table">
@@ -73,11 +81,6 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="container mass-actions" style="visibility: hidden;">
-        <a class="btn btn-success complete">Выполнено</a>
-        <a class="btn btn-warning uncomplete">Не выполнено</a>
-        <a class="btn btn-danger delete">Удалить</a>
-    </div>
     <div class="container">
         <?php if (!empty($links)) : ?>
             <ul class="pagination">
@@ -87,6 +90,9 @@
             <ul>
         <?php endif; ?>
     </div>
+    <?php else : ?>
+        <div class="alert alert-warning">Нет задач</div>
+    <?php endif; ?>
 </div>
 <form class="delete-task-form" action="/task/delete" method="post">
     <input name="ids" value="" type="hidden">

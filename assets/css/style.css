@@ -4,6 +4,12 @@
 .mar-b-10 {
     margin-bottom: 10px !important;
 }
+.pad-l-0 {
+    padding-left: 0;
+}
+.pad-r-0 {
+    padding-right: 0;
+}
 .visible {
     visibility: visible !important;
 }
@@ -19,7 +25,7 @@
 header {
     margin-top: 20px;
     margin-bottom: 20px;
-    overflow: hidden;
+    height: 40px;
 }
 .auth-form {
     width: 60%;

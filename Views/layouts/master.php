@@ -15,28 +15,38 @@
     <div class="wrapper">
         <header class="clearfix">
             <div class="row">
-                <div class="col-md-6 pull-left">
+                <div class="col-md-6">
                     <ul class="pull-left nav nav-pills">
                         <li role="presentation"><a href="/">Главная</a></li>
                     </ul>
                 </div>
-                <div class="col-md-6 pull-left">
-                    <?php if (Request::isUserLoggedIn()) { ?>
-                        <ul class="pull-right nav nav-pills">
-                            <li role="presentation" class="active disabled">
-                                <a href="javascript:void(0);">
-                                    <?php echo \Models\User::getLoggedUserEmail() ?>
-                                </a>
-                            </li>
-                            <li role="presentation"><a href="/task/tasks">Задачи</a></li>
-                            <li role="presentation"><a href="/auth/logout">Выход</a></li>
-                        </ul>
-                    <?php } else { ?>
+                <div class="col-md-6 pad-r-0">
+                    <?php if (Request::isUserLoggedIn()) : ?>
+                        <div class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" id="menu2" type="button" data-toggle="dropdown">
+                                    <a href="javascript:void(0);">
+                                        <?php echo \Models\User::getLoggedUserEmail() ?>
+                                    </a>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                                    <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="/task/tasks">Задачи</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation">
+                                        <a class="delete-task" role="menuitem" tabindex="-1" href="/auth/logout">Выход</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php else : ?>
                         <ul class="pull-right nav nav-pills">
                             <li role="presentation"><a href="/auth/register">Регистрация</a></li>
                             <li role="presentation"><a href="/auth/login">Вход</a></li>
                         </ul>
-                    <?php } ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>

@@ -1,6 +1,6 @@
 # TODO-list
  
-##How to deploy a project
+## How to deploy a project
 
 1. Create file **database.php** (with same structure as **database-example.php**). Specify the database connection settings in this file (
 the database must be previously created).

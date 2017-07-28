@@ -22,13 +22,13 @@ class Task extends Model {
         }
 
         if (empty($errors)) {
-            $title = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $data['title']);
+            $title = preg_replace('.+?<script(.*?)>(.*?)<\/script>', '', $data['title']);
 
             if (empty($title)) {
                 $errors[] = 'Пустой заголовок задачи';
             }
 
-            $content = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $data['content']);
+            $content = preg_replace('.+?<script(.*?)>(.*?)<\/script>', '', $data['content']);
 
             if (empty($content)) {
                 $errors[] = 'Пустое тело задачи';
@@ -69,7 +69,7 @@ class Task extends Model {
             $task = Task::find($id);
 
             if (!empty($task)) {
-                $task->complete = $complete;
+                $task->complete = (bool) $complete;
 
                 if ($task->save()) {
                     $updatedCount++;
